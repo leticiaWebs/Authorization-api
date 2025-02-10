@@ -1,7 +1,7 @@
 server:
   port: ${PORT_APP:9090}
   servlet:
-    context-path: /authorization
+    context-path: /auth
 
 spring:
   application:
@@ -35,3 +35,9 @@ api:
   security:
     token:
       secret: ${JWT_SECRET:123456789}
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

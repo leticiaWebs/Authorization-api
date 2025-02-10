@@ -1,0 +1,10 @@
+    _     _   _  _____  _   _            _     ____  ___ 
+   / \   | | | ||_   _|| | | |          / \   |  _ \|_ _|
+  / _ \  | | | |  | |  | |_| | _____   / _ \  | |_)| | | 
+ / /_\ \ | |_| |  | |  |  _  ||_____| / /_\ \ |  __/ | | 
+/_/   \_\|_____|  |_|  |_| |_|       /_/   \_\|_|   |___|
+
+
+actuator: http://localhost:${server.port}${server.servlet.context-path}/actuator
+health: http://localhost:${server.port}${server.servlet.context-path}/actuator/health
+doc-api: http://localhost:${server.port}${server.servlet.context-path}/swagger-ui/index.html
