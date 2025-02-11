@@ -5,6 +5,6 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package -DskipTests
 
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21-noble
 COPY --from=build /app/target/authorization-*.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
