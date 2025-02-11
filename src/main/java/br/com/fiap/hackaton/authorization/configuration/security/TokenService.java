@@ -25,6 +25,7 @@ public class TokenService {
             final var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("authorization_hackaton")
+                    .withClaim("roles", user.getRoles())
                     .withSubject(user.getUsername())
                     .withExpiresAt(this.expirationDate())
                     .sign(algorithm);
@@ -52,4 +53,5 @@ public class TokenService {
                 .plusHours(10)
                 .toInstant(ZoneOffset.of("-03:00"));
     }
+
 }

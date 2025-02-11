@@ -44,11 +44,11 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     private String recoverToken(HttpServletRequest request) {
-        final var authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer ", "");
+        final var authHerader = request.getHeader("Authorization");
+        if (authHerader == null) {
+            return null;
         }
-        return null;
+        return authHerader.replace("Bearer ", "");
     }
 
 }

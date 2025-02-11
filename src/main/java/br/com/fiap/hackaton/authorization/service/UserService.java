@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found!"));
     }
 
-    public void create(final CreateCredentialsDto data) {
+    public User create(final CreateCredentialsDto data) {
         final var permission = this.permissionService.getPermission(data.isDoctor());
         final var user = new User(
                 data.email(),
@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
                 true,
                 true);
         user.setPermissions(List.of(permission));
-        this.userRepository.save(user);
+        return this.userRepository.save(user);
     }
 
 }

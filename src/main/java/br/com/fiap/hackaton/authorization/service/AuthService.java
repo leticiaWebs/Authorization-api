@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.fiap.hackaton.authorization.record.AccountCredentialsDto;
 import br.com.fiap.hackaton.authorization.record.CreateCredentialsDto;
 import br.com.fiap.hackaton.authorization.record.TokenDto;
+import br.com.fiap.hackaton.authorization.record.ValidUserCreateDto;
 import br.com.fiap.hackaton.authorization.configuration.security.TokenService;
 import br.com.fiap.hackaton.authorization.model.User;
 
@@ -41,15 +42,17 @@ public class AuthService {
         }
 
         final var authentication = this.authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(data.email(), data.password()));
+                .authenticate(new UsernamePasswordAuthenticationToken(data.email(), data.password(), user.getAuthorities()));
 
         return new TokenDto(data.email(), tokenService.createToken((User) authentication.getPrincipal()));
 
     }
 
-    public void create(final CreateCredentialsDto data) {
+    public ValidUserCreateDto create(final CreateCredentialsDto data) {
         final var password = passwordEncoder.encode(data.password());
-        this.userService.create(new CreateCredentialsDto(data.email(), data.fullName(), password, data.isDoctor()));
+        final var user = this.userService
+                .create(new CreateCredentialsDto(data.email(), data.fullName(), password, data.isDoctor()));
+        return ValidUserCreateDto.toRecord(user);
     }
 
 }

@@ -15,12 +15,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigurations {
+public class SecurityConfiguration {
 
     private final SecurityFilter securityFilter;
 
     @Autowired
-    public SecurityConfigurations(final SecurityFilter securityFilter) {
+    public SecurityConfiguration(final SecurityFilter securityFilter) {
         this.securityFilter = securityFilter;
     }
 
@@ -31,7 +31,7 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/index.html/**", "/swagger-ui.html/**",
-                                "/swagger-ui/**", "/auth/signin", "/auth/create")
+                                "/swagger-ui/**", "/actuator/**", "/signin", "/create")
                         .permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
