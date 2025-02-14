@@ -2,7 +2,6 @@ package br.com.fiap.hackaton.authorization.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,10 +35,6 @@ public class AuthService {
 
     public TokenDto signin(final AccountCredentialsDto data) {
         final var user = this.userService.loadUserByUsername(data.email());
-
-        if (user == null) {
-            throw new BadCredentialsException("Invalid email/password");
-        }
 
         final var authentication = this.authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(data.email(), data.password(), user.getAuthorities()));

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import br.com.fiap.hackaton.authorization.model.Permission;
 import br.com.fiap.hackaton.authorization.repository.PermissionRepository;
 
-
 @Service
 public class PermissionService {
 
