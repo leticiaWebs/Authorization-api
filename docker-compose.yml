@@ -17,26 +17,26 @@ services:
     networks:
       - authorization-db-network
 
-  # authorization-api:
-  #   build: .
-  #   restart: always
-  #   container_name: authorization-api
-  #   environment:
-  #     PORT_APP: 9090
-  #     DB_SGDB: postgresql
-  #     DB_HOST: authorization-db
-  #     DB_PORT: 5432
-  #     DB_NAME: authorization
-  #     DB_SCHEMA: hackaton
-  #     DB_USER: authorization
-  #     DB_PASSWORD: authorization
-  #     JWT_SECRET: 123456789
-  #   ports:
-  #     - "9090:9090"
-  #   depends_on:
-  #     - authorization-db
-  #   networks:
-  #     - authorization-db-network
+  authorization-api:
+    build: .
+    restart: always
+    container_name: authorization-api
+    environment:
+      PORT_APP: 9090
+      DB_SGDB: postgresql
+      DB_HOST: authorization-db
+      DB_PORT: 5432
+      DB_NAME: authorization
+      DB_SCHEMA: hackaton
+      DB_USER: authorization
+      DB_PASSWORD: authorization
+      JWT_SECRET: 123456789
+    ports:
+      - "9090:9090"
+    depends_on:
+      - authorization-db
+    networks:
+      - authorization-db-network
 
 networks:
   authorization-db-network:
