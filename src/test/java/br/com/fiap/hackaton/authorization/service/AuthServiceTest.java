@@ -14,10 +14,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.fiap.hackaton.authorization.configuration.security.TokenService;
+import br.com.fiap.hackaton.authorization.mock.AccountCredentialsDtoMock;
 import br.com.fiap.hackaton.authorization.mock.AuthenticationMock;
+import br.com.fiap.hackaton.authorization.mock.CreateCredentialsDtoMock;
 import br.com.fiap.hackaton.authorization.mock.UserMock;
-import br.com.fiap.hackaton.authorization.record.AccountCredentialsDto;
-import br.com.fiap.hackaton.authorization.record.CreateCredentialsDto;
 
 class AuthServiceTest {
 
@@ -46,7 +46,7 @@ class AuthServiceTest {
     void whenCreateUserReturnUsernameAndRolesByUSer() {
         when(this.passwordEncoder.encode(any())).thenReturn("encoder");
         when(this.userService.create(any())).thenReturn(UserMock.mock());
-        final var response = this.authService.create(new CreateCredentialsDto("email", "fullname", "password", true));
+        final var response = this.authService.create(CreateCredentialsDtoMock.mock());
         assertNotNull(response);
     }
 
@@ -57,7 +57,7 @@ class AuthServiceTest {
         when(this.authenticationManager.authenticate((any()))).thenReturn(AuthenticationMock.mock());
         when(this.tokenService.createToken(UserMock.mock())).thenReturn("token");
 
-        final var response = this.authService.signin(new AccountCredentialsDto("email", "password"));
+        final var response = this.authService.signin(AccountCredentialsDtoMock.mock());
         assertNotNull(response);
 
     }
